@@ -57,6 +57,8 @@ WebElement callOpenInterest = strikePrice.findElement(By.xpath("../parent::td/pr
 WebElement callChangeInInterest = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[2]"));
 WebElement callVolume = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[3]"));
 WebElement callIV = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[4]"));
+WebElement callLTP=strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[5]"));
+WebElement putLTP=strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[17]"));
 WebElement putIV = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[18]"));
 WebElement putVolume = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[19]"));
 WebElement putChangeInInterest=strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[20]"));
@@ -69,6 +71,8 @@ System.out.println("The Open Interest for CE the strike Price "+strikePrice.getT
 System.out.println("The Change In Open Interest for CE strike Price "+strikePrice.getText()+" is :"+callChangeInInterest.getText());
 System.out.println("The volume  for CE strike Price "+strikePrice.getText()+" is :"+callVolume.getText());
 System.out.println("The Implied Volatility for CE strike Price "+strikePrice.getText()+" is :"+callIV.getText());
+System.out.println("The Last traded price for CE strike Price "+strikePrice.getText()+" is :"+callLTP.getText());
+System.out.println("The Last traded price for Put strike Price "+strikePrice.getText()+" is :"+putLTP.getText());
 System.out.println("The Implied Volatility for put Strike pice "+strikePrice.getText()+" is :"+putIV.getText());
 System.out.println("The volume for put Strike pice "+strikePrice.getText()+" is :"+putVolume.getText());
 System.out.println("The change in Open Interest for put Strike pice "+strikePrice.getText()+" is :"+putChangeInInterest.getText());
