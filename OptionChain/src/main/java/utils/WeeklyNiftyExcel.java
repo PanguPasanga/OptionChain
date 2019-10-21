@@ -1,10 +1,12 @@
 package utils;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -13,18 +15,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WeeklyNiftyExcel 
 {
-	public static void main(String args[]) throws IOException
+	public static void writeToExcel(List <String> optionsValues,String strike) throws IOException
 	{
-		FileInputStream fis=new FileInputStream("F:\\Z\\OpenChain\\Nifty_Weekly_17Oct.xlsx");
+		FileInputStream fis=new FileInputStream(".\\DataSheet\\Nifty_Weekly_17Oct.xlsx");
 		//
 		XSSFWorkbook wb=new XSSFWorkbook(fis);
 		XSSFSheet sheet=wb.getSheet("Weekly");
 		int rowCount = sheet.getPhysicalNumberOfRows();
-		System.out.println(rowCount);
+		//System.out.println(rowCount);
 		
 		int cellCount = sheet.getRow(0).getLastCellNum();
 		DayOfWeek day= LocalDate.now().getDayOfWeek();
 		String dayWeek=day.toString();
+		int index=0;
 		for(int i=0;i<rowCount; i++)
 		{
 			XSSFRow rw=sheet.getRow(i);
@@ -41,22 +44,26 @@ public class WeeklyNiftyExcel
 						{
 							if(cw==null)
 							{
+								System.out.println(strike+"_"+dayWeek);
+								System.out.println(sheet.getRow(i).getCell(0).toString());
 								//String celValue=sh.getRow(0).getCell(1).toString();
-								if(sheet.getRow(i).getCell(0).toString().equals("10800_Friday"))
+								if(sheet.getRow(i).getCell(0).toString().equalsIgnoreCase(strike+"_"+dayWeek))
 								{
-									
-									rw.createCell(j).setCellValue("Naga");
+									System.out.println("Into the IF");
+									rw.createCell(j).setCellValue(optionsValues.get(index++));
+									System.out.println(optionsValues.get(index)+" Strike"+strike);
 									break;
 									
 								}
 								else
 								{
+									//System.out.println("In the continue statement");
 									continue;
 								}
 							}
 							else
 							{
-								System.out.println(cw.getStringCellValue());	
+								//System.out.println(cw.getStringCellValue());	
 								
 							}
 							
@@ -68,12 +75,11 @@ public class WeeklyNiftyExcel
 					}
 			}
 		}
-		FileOutputStream fos=new FileOutputStream("F:\\\\Z\\\\OpenChain\\\\Nifty_Weekly_17Oct.xlsx");
+		FileOutputStream fos=new FileOutputStream(".\\DataSheet\\Nifty_Weekly_17Oct.xlsx");
 		wb.write(fos);
 		fos.close();
 		wb.close();
-		
-		
 	}
+	
 
 }

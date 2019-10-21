@@ -12,11 +12,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import optionMethods.SeMethods;
+import utils.WeeklyNiftyExcel;
 
 public class NseWeeklyPage 
 {	
+	
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
+		String CE_oi,CE_choi,CE_vol,CE_iv,CE_ltp,PE_ltp,PE_iv,PE_vol,PE_choi,PE_oi,livePrice,strikeData;
 	
 	System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 	WebDriver driver=new ChromeDriver();
@@ -63,8 +66,9 @@ WebElement putIV = strikePrice.findElement(By.xpath("../parent::td/preceding-sib
 WebElement putVolume = strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[19]"));
 WebElement putChangeInInterest=strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[20]"));
 WebElement putOpenInterest =strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[21]"));
+WebElement niftyPrice=driver.findElement(By.xpath("//nobr[contains(text(),1)]"));
 
-//To Print all the values
+/*//To Print all the values
 System.out.println("----------------------------------Printing values----------------------------------------");
 
 System.out.println("The Open Interest for CE the strike Price "+strikePrice.getText()+" is :"+callOpenInterest.getText());
@@ -78,8 +82,39 @@ System.out.println("The volume for put Strike pice "+strikePrice.getText()+" is 
 System.out.println("The change in Open Interest for put Strike pice "+strikePrice.getText()+" is :"+putChangeInInterest.getText());
 System.out.println("The Open Interest for put Strike pice "+strikePrice.getText()+" is :"+putOpenInterest.getText());
 
-System.out.println("---------------------------------------End of strike values------------------------------");
+System.out.println("---------------------------------------End of strike values------------------------------");*/
 	
+
+CE_oi=callOpenInterest.getText();
+CE_choi=callChangeInInterest.getText();
+CE_vol=callVolume.getText();
+CE_iv=callIV.getText();
+CE_ltp=callLTP.getText();
+PE_ltp=putLTP.getText();
+PE_iv=putIV.getText();
+PE_vol=putVolume.getText();
+PE_choi=putChangeInInterest.getText();
+PE_oi=putOpenInterest.getText();
+livePrice=niftyPrice.getText();
+strikeData=strikePrice.getText();
+
+
+//-----------------------------------------
+List<String> optionData = new ArrayList<String>();
+optionData.add(CE_oi);
+optionData.add(CE_choi);
+optionData.add(CE_vol);
+optionData.add(CE_iv);
+optionData.add(CE_ltp);
+optionData.add(PE_ltp);
+optionData.add(PE_iv);
+optionData.add(PE_vol);
+optionData.add(PE_choi);
+optionData.add(PE_oi);
+optionData.add(livePrice);
+
+WeeklyNiftyExcel.writeToExcel(optionData,strikeData);
+optionData.clear();
 	}
 }
 	
