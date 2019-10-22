@@ -28,7 +28,7 @@ public class WeeklyNiftyExcel
 		DayOfWeek day= LocalDate.now().getDayOfWeek();
 		String dayWeek=day.toString();
 		int index=0;
-		for(int i=0;i<rowCount; i++)
+		for(int i=1;i<rowCount; i++)
 		{
 			XSSFRow rw=sheet.getRow(i);
 			if(rw==null)
@@ -44,15 +44,16 @@ public class WeeklyNiftyExcel
 						{
 							if(cw==null)
 							{
-								System.out.println(strike+"_"+dayWeek);
-								System.out.println(sheet.getRow(i).getCell(0).toString());
+								//System.out.println(strike+"_"+dayWeek);
+								//System.out.println(sheet.getRow(i).getCell(0).toString());
 								//String celValue=sh.getRow(0).getCell(1).toString();
 								if(sheet.getRow(i).getCell(0).toString().equalsIgnoreCase(strike+"_"+dayWeek))
 								{
-									System.out.println("Into the IF");
-									rw.createCell(j).setCellValue(optionsValues.get(index++));
+									//System.out.println("Into the IF");
 									System.out.println(optionsValues.get(index)+" Strike"+strike);
-									break;
+									rw.createCell(j).setCellValue(optionsValues.get(index++));
+									//
+									//break;
 									
 								}
 								else

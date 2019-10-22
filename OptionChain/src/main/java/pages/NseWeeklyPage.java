@@ -113,6 +113,11 @@ optionData.add(PE_choi);
 optionData.add(PE_oi);
 optionData.add(livePrice);
 
+for(String b:optionData) {
+	System.out.println(b);
+	
+}
+System.out.println("------------------End of strike-----------------");
 WeeklyNiftyExcel.writeToExcel(optionData,strikeData);
 optionData.clear();
 	}
