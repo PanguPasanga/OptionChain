@@ -16,10 +16,12 @@ import utils.WeeklyNiftyExcel;
 
 public class NseWeeklyPage 
 {	
+	public static int k=1;
 	
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
 		String CE_oi,CE_choi,CE_vol,CE_iv,CE_ltp,PE_ltp,PE_iv,PE_vol,PE_choi,PE_oi,livePrice,strikeData;
+		
 	
 	System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 	WebDriver driver=new ChromeDriver();
@@ -49,6 +51,7 @@ public class NseWeeklyPage
 	strikePrices.add("11500.00");
 	strikePrices.add("11600.00");
 	strikePrices.add("11700.00");
+	List<String> optionData = new ArrayList<String>();
 	for(String s:strikePrices)
 	{
 		//System.out.println(s);
@@ -68,22 +71,7 @@ WebElement putChangeInInterest=strikePrice.findElement(By.xpath("../parent::td/p
 WebElement putOpenInterest =strikePrice.findElement(By.xpath("../parent::td/preceding-sibling::td/following-sibling::td[21]"));
 WebElement niftyPrice=driver.findElement(By.xpath("//nobr[contains(text(),1)]"));
 
-/*//To Print all the values
-System.out.println("----------------------------------Printing values----------------------------------------");
 
-System.out.println("The Open Interest for CE the strike Price "+strikePrice.getText()+" is :"+callOpenInterest.getText());
-System.out.println("The Change In Open Interest for CE strike Price "+strikePrice.getText()+" is :"+callChangeInInterest.getText());
-System.out.println("The volume  for CE strike Price "+strikePrice.getText()+" is :"+callVolume.getText());
-System.out.println("The Implied Volatility for CE strike Price "+strikePrice.getText()+" is :"+callIV.getText());
-System.out.println("The Last traded price for CE strike Price "+strikePrice.getText()+" is :"+callLTP.getText());
-System.out.println("The Last traded price for Put strike Price "+strikePrice.getText()+" is :"+putLTP.getText());
-System.out.println("The Implied Volatility for put Strike pice "+strikePrice.getText()+" is :"+putIV.getText());
-System.out.println("The volume for put Strike pice "+strikePrice.getText()+" is :"+putVolume.getText());
-System.out.println("The change in Open Interest for put Strike pice "+strikePrice.getText()+" is :"+putChangeInInterest.getText());
-System.out.println("The Open Interest for put Strike pice "+strikePrice.getText()+" is :"+putOpenInterest.getText());
-
-System.out.println("---------------------------------------End of strike values------------------------------");*/
-	
 
 CE_oi=callOpenInterest.getText();
 CE_choi=callChangeInInterest.getText();
@@ -100,7 +88,7 @@ strikeData=strikePrice.getText();
 
 
 //-----------------------------------------
-List<String> optionData = new ArrayList<String>();
+
 optionData.add(CE_oi);
 optionData.add(CE_choi);
 optionData.add(CE_vol);
@@ -121,6 +109,7 @@ System.out.println("------------------End of strike-----------------");
 WeeklyNiftyExcel.writeToExcel(optionData,strikeData);
 optionData.clear();
 	}
+	
 }
 	
 }
